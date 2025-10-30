@@ -28,3 +28,32 @@
     <li>Random Forest Regressor</li>
     <li>Decision Tree Regressor</li>
 </ul>
+<h2>React Interactive Web App Features</h2>
+<ul>
+    <li>User Authentication and Access Control</li>
+    <li>Real-time Sensor Data Visualization and RUL Prediction</li>
+    <li>Alerting and Notification System through Web Browser and Telegram</li>
+    <li>Maintenance Scheduling through Personalized Calendar</li>
+    <li>Static Plots and Dashboard</li>
+    <li>Feedback and Reporting</li>
+</ul>
+
+<h2>Technology Stack</h2>
+<ul>
+    <li>React.js</li>
+    <li>Flask</li>
+    <li>MongoDB</li>
+    <li>Node.js</li>
+    <li>Telegram</li>
+    <li>React Chart.js</li>
+</ul>
+
+<h2>Model Performance</h2>
+<p>XG Boost achieved the highest R2 score of 0.65, indicating strong predictive capability.</p>
+
+<h2>Conclusion</h2>
+<ul>
+    <li>XG Boost demonstrated the highest predictive capability.</li>
+    <li>The React Interactive Web App offers comprehensive features for real-time monitoring, prediction, scheduling, and notification.</li>
+    <li>Continuous refinement and integration of user feedback enhance the predictive maintenance system for industrial applications.</li>
+</ul>

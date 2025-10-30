@@ -11,3 +11,20 @@
     <li>Predict equipment failures and maintenance needs in advance.</li>
     <li>Enable proactive maintenance scheduling to minimize downtime.</li>
 </ul>
+
+<h2>Dataset Source</h2>
+<p>The dataset used for this project is sourced from NASA CMAPSS Jet Engine Simulated Data. It consists of multiple multivariate time series, each representing data from a different engine in a fleet of engines of the same type.</p>
+
+<h2>Data Preprocessing</h2>
+<ul>
+    <li>Feature Reduction</li>
+    <li>Handling Missing Values</li>
+    <li>Applying Min-Max Scaler</li>
+</ul>
+
+<h2>Model Training (RUL Prediction)</h2>
+<ul>
+    <li>XG Boost</li>
+    <li>Random Forest Regressor</li>
+    <li>Decision Tree Regressor</li>
+</ul>

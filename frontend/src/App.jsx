@@ -6,7 +6,6 @@ import Login from "./Login";
 import Register from "./Register";
 import NotFound from "./components/NotFound";
 import './index.css';
-// import Quiz from "./components/Quiz";
 import ProfilePage from "./components/ProfilePage";
 import Calendar from "./components/Calender";
 import Reports from "./components/Reports";
@@ -19,7 +18,6 @@ const App = () => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<UserDashboard />} />
-        {/* <Route path="/quiz" element={<Quiz />} /> */}
         <Route path="/profile" element={<ProfilePage />} />
         <Route path="/calender" element={<Calendar />} />
         <Route path="/reports" element={<Reports />} />

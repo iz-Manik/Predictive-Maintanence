@@ -7,7 +7,7 @@ const LandingPage = () => {
       {/* Navigation */}
       <nav className="bg-blue-500 p-4 text-white w-full">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold">AI Kavach</div>
+          <div className="text-2xl font-bold">MechSage</div>
           <ul className="flex space-x-4">
             <li><Link to="/" className="hover:text-gray-300">Home</Link></li>
             <li><Link to="/login" className="hover:text-gray-300">Sign In </Link></li>
@@ -56,7 +56,7 @@ const LandingPage = () => {
 
       {/* Footer */}
       <footer className="bg-gray-800 text-white text-center py-2 fixed bottom-0 left-0 w-full">
-        <p>&copy; 2024 AI Kavach . All rights reserved.</p>
+        <p>&copy; 2025 MechSage. All rights reserved.</p>
       </footer>
 
     </div>

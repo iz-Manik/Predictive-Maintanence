@@ -1,97 +1,69 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
-import { useEffect } from 'react';
-import axios from "axios";
-import ForcastChart from './ForcastChart.jsx';
 
-const daysInMonth = (year, month) => new Date(year, month, 0).getDate();
-const month = 2; // April (months are 0-indexed)
-const year = 2024;
-const days = Array.from({ length: daysInMonth(year, month + 1) }, (_, i) => i + 1);
+const Feedback = () => {
+    const [feedbackMessage, setFeedbackMessage] = useState('');
+    const [thankYou, setThankYou] = useState(''); // 👈 added for thank-you message
 
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-
-
-const Calendar = () => {
-    const navigate = useNavigate();
-    const updateUserReminders = async (email, updatedReminders) => {
         try {
-          // Make a POST request to your API endpoint
-          const response = await axios.post('http://localhost:8000/updateUserReminders', {
-            email,
-            reminders: reminders
-          });
+            const response = await fetch('http://localhost:8000/api/feedback', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: feedbackMessage })
+            });
 
-          // Check if the update was successful
-          if (response.status === 200) {
-            // Update the local storage item named 'rem' with the new reminders data
-            localStorage.setItem('rem', JSON.stringify(reminders));
-            console.log('Reminders updated successfully.');
-          } else {
-            console.error('Failed to update reminders.');
-          }
+            if (response.ok) {
+                console.log('Feedback saved successfully');
+                setFeedbackMessage(''); // 👈 clear textbox
+                setThankYou('Thank you for your feedback!'); // 👈 show message
+                setTimeout(() => setThankYou(''), 3000); // 👈 hide after 3 seconds
+            } else {
+                console.error('Error saving feedback:', response.statusText);
+            }
         } catch (error) {
-          console.error('Error updating reminders:', error);
+            console.error('Error saving feedback:', error.message);
         }
-      };
-      const type=localStorage.getItem("type")
-    const [expanded, setExpanded] = useState(true)
-    const logout = () => {
+    };
 
-        localStorage.removeItem("token");
-localStorage.removeItem("type");
-        navigate("/");
+    const handleChange = (event) => {
+        setFeedbackMessage(event.target.value);
     };
-    const [reminders, setReminders] = useState(() => {
-        // Load reminders from localStorage or initialize to an empty object
-        const storedReminders = localStorage.getItem('reminders');
-        return storedReminders ? JSON.parse(storedReminders) : {};
-    });
-    const handleDayClick = (day) => {
-        const reminder = prompt(`Set reminder for March ${day}, 2024:`);
-        if (reminder) {
-            setReminders({ ...reminders, [day]: reminder });
-        }
-    };
-    useEffect(() => {
-        // Update localStorage whenever reminders change
-        const email=localStorage.getItem('email');
-        updateUserReminders(email, JSON.stringify(reminders));
-        localStorage.setItem('reminders', JSON.stringify(reminders));
-    }, [reminders]);
 
     return (
-        <>
-            <nav className="bg-blue-500 p-4 text-white">
-                <div className="container mx-auto flex justify-between items-center">
-                    <div className="text-2xl font-bold">Kavach</div>
-                    <ul className="flex space-x-4">
-                        <li><Link to="/dashboard" className="hover:text-gray-300 text-lg">Home</Link></li>
-                        {type=="Manager" && (<li><Link to="/calender" className='hover:text-gray-300 text-lg'>Calender</Link></li>)}
-                        <li><Link to="/reports" className='hover:text-gray-300 text-lg'>Reports</Link></li>
-                        <li><Link to="/profile" className="hover:text-gray-300 text-lg">Profile</Link></li>
-                        {}
-                        <li><button onClick={logout} className="hover:text-gray-300 text-lg">Logout</button></li>
-                    </ul>
-                </div>
-            </nav>
-            <div className="text-5xl">
-                <b style={{ 'marginLeft': '150px' }}>March 2024</b>
-            </div>
+        <div className="flex flex-col justify-center items-center ">
+            <form onSubmit={handleSubmit}>
+                <h1 className="text-3xl text-center ">Feedback</h1>
 
-            <div className="grid grid-cols-7 gap-4 p-4" style={{ 'marginLeft': '150px', 'marginRight': '150px' }}>
-                {days.map((day) => (
-                    <div key={day} className="border-4 border-blue-500 p-4 flex flex-col" style={{ 'borderStyle': 'double' }}>
-                        <button onClick={() => handleDayClick(day)} className="text-lg font-bold">
-                            {day}
-                        </button>
-                        <div className="mt-2 text-sm">{reminders[day]}</div>
-                    </div>
-                ))}
-            </div>
-        </>
+                <div className="mb-6 mt-12 flex justify-center items-center">
+                    <input
+                        type="text"
+                        id="default-input"
+                        className="bg-gray-50 border border-gray-300 text-black text-sm rounded-lg
+                            focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        value={feedbackMessage}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <br />
+                <button
+                    type="submit"
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300
+                    font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none text-center"
+                >
+                    Submit
+                </button>
+            </form>
+
+            {thankYou && (
+                <p className="text-green-600 font-semibold mt-4">{thankYou}</p>
+            )}
+        </div>
     );
 };
 
-export default Calendar;
+export default Feedback;
